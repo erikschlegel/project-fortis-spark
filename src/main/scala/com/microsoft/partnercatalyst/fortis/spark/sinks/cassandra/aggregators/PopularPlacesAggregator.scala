@@ -40,23 +40,10 @@ class PopularPlacesAggregator extends FortisAggregatorBase with Serializable{
 
     s"SELECT a.$SelectClause, " +
     s"       $IncrementalUpdateMentionsUDF, $IncrementalUpdateSentimentUDF " +
-    s"FROM   $DfTableNameComputedAggregates a " /*+
-    s"LEFT OUTER JOIN $FortisTargetTablename b " +
-    s" ON a.pipelinekey = b.pipelinekey and a.placeid = b.placeid " +
-    s"    and a.periodtype = b.periodtype and a.period = b.period " +
-    s"    and a.externalsourceid = b.externalsourceid and a.conjunctiontopic1 = b.conjunctiontopic1 " +
-    s"    and a.conjunctiontopic2 = b.conjunctiontopic2 and a.conjunctiontopic3 = b.conjunctiontopic3 "*/
+    s"FROM   $DfTableNameComputedAggregates a "
   }
 
   override def FortisTargetTablename: String = TargetTableName
-
-  override def FortisTargetTableDataFrame(session: SparkSession): DataFrame = {
-    val popularPlacesDF = session.sqlContext.read.format(CassandraFormat)
-      .options(Map("keyspace" -> KeyspaceName, "table" -> FortisTargetTablename))
-      .load()
-
-    popularPlacesDF
-  }
 
   override def flattenEvents(session: SparkSession, eventDS: Dataset[Event]): DataFrame = {
     import session.implicits._
@@ -64,6 +51,7 @@ class PopularPlacesAggregator extends FortisAggregatorBase with Serializable{
   }
 
   override def IncrementalUpdate(session: SparkSession, aggregatedDS: DataFrame): DataFrame = {
+    aggregatedDS.createOrReplaceTempView(FortisTargetTablename)
     val cassandraSave = session.sqlContext.sql(IncrementalUpdateQuery)
 
     cassandraSave
