@@ -57,11 +57,7 @@ object CassandraTest {
         title = "twitter post" ),
       analysis = Analysis(
         sentiments = List(.5),
-<<<<<<< HEAD
         locations = List(Location(wofId = "1234", confidence = Option(1.0), latitude = Option(40.7357627), longitude = Option(-74.0034912))),
-=======
-        locations = List(Location(wofId = "1234", confidence = Option(1.0), latitude = Option(12.21), longitude = Option(43.1))),
->>>>>>> Fortis Cassandra Intregration (#71)
         keywords = List(Tag(name = "isis", confidence = Option(1.0)), Tag(name ="car", confidence = Option(1.0))),
        //todo genders = List(Tag(name = "male", confidence = Option(1.0)), Tag(name ="female", confidence = Option(1.0))),
         entities = List(Tag(name = "putin", confidence = Option(1.0))),
@@ -79,11 +75,7 @@ object CassandraTest {
           title = "twitter post" ),
         analysis = Analysis(
           sentiments = List(.6),
-<<<<<<< HEAD
           locations = List(Location(wofId = "1234", confidence = Option(1.0), longitude = Option(-97.7760937), latitude = Option(30.294221))),
-=======
-          locations = List(Location(wofId = "1234", confidence = Option(1.0), latitude = Option(12.21), longitude = Option(43.1))),
->>>>>>> Fortis Cassandra Intregration (#71)
           keywords = List(Tag(name = "isis", confidence = Option(1.0)), Tag(name ="car", confidence = Option(1.0)), Tag(name ="bomb", confidence = Option(1.0)), Tag(name ="fatalities", confidence = Option(1.0))),
          //todo genders = List(Tag(name = "male", confidence = Option(1.0)), Tag(name ="female", confidence = Option(1.0))),
           entities = List(Tag(name = "putin", confidence = Option(1.0))),
@@ -94,8 +86,6 @@ object CassandraTest {
     CassandraEventsSink(dstream, sparksession)
     ssc.start()
     ssc.awaitTermination()
-<<<<<<< HEAD
-=======
     /*   = "twitter",
       externalsourceid = "cnn",
       batchid = batchid,
@@ -112,7 +102,5 @@ object CassandraTest {
       sourceurl = "http://cnn.com",
       body = "test message a new change",
       title = "twitter post")))*/
-
->>>>>>> Fortis Cassandra Intregration (#71)
   }
 }

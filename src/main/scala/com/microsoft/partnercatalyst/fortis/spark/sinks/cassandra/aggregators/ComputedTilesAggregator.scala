@@ -1,6 +1,5 @@
 package com.microsoft.partnercatalyst.fortis.spark.sinks.cassandra.aggregators
 
-import com.microsoft.partnercatalyst.fortis.spark.sinks.cassandra.CassandraEventsSink.{CassandraFormat, TableEventBatches}
 import com.microsoft.partnercatalyst.fortis.spark.sinks.cassandra.{CassandraComputedTiles, CassandraPopularPlaces, CassandraPopularTopics}
 import com.microsoft.partnercatalyst.fortis.spark.sinks.cassandra.dto.{ComputedTile, Event}
 import org.apache.spark.sql.{DataFrame, Dataset, SparkSession}
