@@ -31,7 +31,7 @@ class ComputedTilesAggregator extends FortisAggregatorBase with Serializable {
     val SelectClause = (GroupedBaseColumnNames ++ Seq("pipelinekey", "externalsourceid")).mkString(",a.")
 
     s"SELECT a.$SelectClause, SumMentions(a.mentioncountagg, IF(IsNull(b.mentioncount), 0, b.mentioncount)) as mentioncount, " +
-    s"                        SumMentions(MeanAverage(a.avgsentimentagg, a.mentioncountagg), IF(IsNull(b.avgsentimentnumerator), 0, b.avgsentimentnumerator))) as avgsentimentnumerator " +
+    s"                        SumMentions(MeanAverage(a.avgsentimentagg, a.mentioncountagg), IF(IsNull(b.avgsentimentnumerator), 0, b.avgsentimentnumerator)) as avgsentimentnumerator, " +
     s"       MergeHeatMap(a.heatmap, IF(IsNull(b.heatmap), '{}', b.heatmap)) as heatmap " +
     s"FROM   $DfTableNameComputedAggregates a " +
     s"LEFT OUTER JOIN $FortisTargetTablename b " +
