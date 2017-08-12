@@ -69,7 +69,6 @@ object CassandraEventsSink{
     val eventsDS = events.toDF().as[Event]
     val filteredEvents = eventsDS.join(ds, Seq("eventid", "pipelinekey"))
     filteredEvents.cache()
-
     filteredEvents.as[Event]
   }
 

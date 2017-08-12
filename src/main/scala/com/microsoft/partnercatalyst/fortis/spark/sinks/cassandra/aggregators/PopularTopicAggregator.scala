@@ -44,6 +44,14 @@ class PopularTopicAggregator extends FortisAggregatorBase with Serializable{
 
   override def FortisTargetTablename: String = "populartopics"
 
+  override def FortisTargetTableDataFrame(session: SparkSession): DataFrame = {
+    val popularTopicsDF = session.sqlContext.read.format(CassandraFormat)
+      .options(Map("keyspace" -> KeyspaceName, "table" -> FortisTargetTablename))
+      .load()
+
+    popularTopicsDF
+  }
+
   override def flattenEvents(session: SparkSession, eventDS: Dataset[Event]): DataFrame = {
     import session.implicits._
     eventDS.flatMap(CassandraPopularTopics(_)).toDF()

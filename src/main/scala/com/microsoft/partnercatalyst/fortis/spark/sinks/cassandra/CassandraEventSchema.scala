@@ -7,8 +7,8 @@ import com.microsoft.partnercatalyst.fortis.spark.sinks.cassandra.dto._
 import java.text.Collator
 import java.util.Locale
 
-import com.microsoft.partnercatalyst.fortis.spark.analyzer.timeseries.{Period, PeriodType}
 import com.microsoft.partnercatalyst.fortis.spark.transforms.locations.TileUtils.{DETAIL_ZOOM_DELTA, MAX_ZOOM, MIN_ZOOM}
+import com.microsoft.partnercatalyst.fortis.spark.analyzer.timeseries.{Period, PeriodType}
 import com.microsoft.partnercatalyst.fortis.spark.transforms.locations._
 
 object CassandraEventSchema {
@@ -109,7 +109,6 @@ object CassandraComputedTiles {
     )
   }
 }
-
 
 object CassandraEventTopicSchema {
   def apply(item: Event): Seq[EventTopics] = {

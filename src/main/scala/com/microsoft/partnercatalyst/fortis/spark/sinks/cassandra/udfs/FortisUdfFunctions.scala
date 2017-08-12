@@ -20,8 +20,8 @@ object FortisUdfFunctions {
     val mentionCountField = "mentioncountagg"
 
     def getSentimentAvg(heatmapEntry: Option[HeatmapEntry]) = heatmapEntry match {
-        case None => 0D
-        case hm => hm.get.avgsentimentagg
+      case None => 0D
+      case hm => hm.get.avgsentimentagg
     }
 
     def getMentionCount(heatmapEntry: Option[HeatmapEntry]) = heatmapEntry match {
@@ -39,8 +39,8 @@ object FortisUdfFunctions {
       )).toMap
 
     val mergedMap = heatmap ++ heatmapKV.map{case(tileId, entry) => tileId -> HeatmapEntry(
-        avgsentimentagg = MeanAverage(getSentimentAvg(heatmap.get(tileId)), getMentionCount(heatmap.get(tileId))) + MeanAverage(Option(entry.avgsentimentagg).getOrElse(0D), Option(entry.mentioncountagg).getOrElse(0L)),
-        mentioncountagg = getMentionCount(heatmap.get(tileId)) + Option(entry.mentioncountagg).getOrElse(0L)
+      avgsentimentagg = MeanAverage(getSentimentAvg(heatmap.get(tileId)), getMentionCount(heatmap.get(tileId))) + MeanAverage(Option(entry.avgsentimentagg).getOrElse(0D), Option(entry.mentioncountagg).getOrElse(0L)),
+      mentioncountagg = getMentionCount(heatmap.get(tileId)) + Option(entry.mentioncountagg).getOrElse(0L)
     )}
 
     compactRender(decompose(mergedMap))
